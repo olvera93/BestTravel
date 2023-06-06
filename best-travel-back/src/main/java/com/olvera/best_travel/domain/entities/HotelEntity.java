@@ -7,25 +7,21 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
+@Entity(name = "hotel")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "hotel")
 public class HotelEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long hotelId;
-
+    private Long id;
     @Column(length = 50)
     private String name;
     @Column(length = 50)
     private String address;
-
     private Integer rating;
-
     private BigDecimal price;
 
     @ToString.Exclude
@@ -36,5 +32,5 @@ public class HotelEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "hotel"
     )
-    private Set<ReservationEntity> reservations;
+    private Set<ReservationEntity> reservation;
 }

@@ -8,33 +8,25 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
+@Entity(name = "fly")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-@Entity(name = "fly")
 public class FlyEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long flyId;
-
+    private Long id;
     private Double originLat;
-
     private Double originLng;
-
     private Double destinyLat;
-
     private Double destinyLng;
-
     @Column(length = 20)
     private String originName;
-
     @Column(length = 20)
     private String destinyName;
-
     private BigDecimal price;
-
     @Enumerated(EnumType.STRING)
     private AeroLine aeroLine;
 
@@ -47,5 +39,4 @@ public class FlyEntity implements Serializable {
             mappedBy = "fly"
     )
     private Set<TicketEntity> tickets;
-
 }

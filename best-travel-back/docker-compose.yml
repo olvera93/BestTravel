@@ -1,7 +1,9 @@
 version: '3.8'
+
 services:
+
   db:
-    image: postgres:latest
+    image: postgres:15.2
     container_name: best_travel
     restart: always
     volumes:
@@ -13,6 +15,7 @@ services:
       - POSTGRES_PASSWORD=olvera1
     ports:
       - "5432:5432"
+
   cache-db:
     image: redis:6.2-alpine
     container_name: best_travel_cache
