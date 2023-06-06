@@ -34,7 +34,7 @@ public class TicketService implements ITicketService {
         var fly = flyRepository.findById(request.getIdFly()).orElseThrow();
         var customer = customerRepository.findById(request.getIdClient()).orElseThrow();
         var ticketToPersist = TicketEntity.builder()
-                .id(UUID.randomUUID())
+                .ticketId(UUID.randomUUID())
                 .fly(fly)
                 .customer(customer)
                 .price(fly.getPrice().multiply(BigDecimal.valueOf(0.25)))
@@ -44,7 +44,7 @@ public class TicketService implements ITicketService {
                 .build();
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
-        log.info("Ticket saved with id: {}", ticketPersisted.getId());
+        log.info("Ticket saved with id: {}", ticketPersisted.getTicketId());
         return this.entityToResponse(ticketToPersist);
     }
 

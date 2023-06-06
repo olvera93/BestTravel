@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: 'jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}'
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
+    url: 'jdbc:postgresql://localhost:5432/best_travel'
+    username: olvera
+    password: olvera1
     hikari:
       connection-timeout: 20000
       maximum-pool-size: 5

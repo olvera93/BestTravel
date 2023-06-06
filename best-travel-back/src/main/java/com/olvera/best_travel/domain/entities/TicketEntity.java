@@ -20,7 +20,8 @@ import java.util.UUID;
 public class TicketEntity implements Serializable {
 
     @Id
-    private UUID id;
+    @Column(name = "id")
+    private UUID ticketId;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
     private LocalDate purchaseDate;

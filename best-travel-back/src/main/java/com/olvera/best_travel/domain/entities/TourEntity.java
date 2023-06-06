@@ -18,7 +18,8 @@ public class TourEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long tourId;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -50,7 +51,7 @@ public class TourEntity implements Serializable {
 
     public void removeTicket(UUID id) {
         if ((Objects.isNull(this.tickets))) this.tickets = new HashSet<>();
-        this.tickets.removeIf(ticket -> ticket.getId().equals(id));
+        this.tickets.removeIf(ticket -> ticket.getTicketId().equals(id));
     }
 
     public void updateTicket() {
@@ -64,7 +65,7 @@ public class TourEntity implements Serializable {
 
     public void removeReservation(UUID reservationId) {
         if (Objects.isNull(this.reservations)) this.reservations = new HashSet<>();
-        this.reservations.removeIf(reservation -> reservation.getId().equals(reservationId));
+        this.reservations.removeIf(reservation -> reservation.getReservationId().equals(reservationId));
     }
 
 }

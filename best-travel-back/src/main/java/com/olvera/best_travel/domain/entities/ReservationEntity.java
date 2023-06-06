@@ -20,7 +20,8 @@ import java.util.UUID;
 public class ReservationEntity implements Serializable {
 
     @Id
-    private UUID id;
+    @Column(name = "id")
+    private UUID reservationId;
     @Column(name = "date_reservation")
     private LocalDateTime dateTimeReservation;
     private LocalDate dateStart;

@@ -16,7 +16,8 @@ public class HotelEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long hotelId;
     @Column(length = 50)
     private String name;
     @Column(length = 50)
