@@ -30,4 +30,10 @@ public class TicketController {
     public ResponseEntity<TicketResponse> putTicket(@PathVariable UUID id, @RequestBody TicketRequest request) {
         return ResponseEntity.ok(this.ticketService.update(request, id));
     }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable UUID id) {
+        this.ticketService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
