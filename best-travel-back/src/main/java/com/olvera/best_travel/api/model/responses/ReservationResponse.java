@@ -16,20 +16,21 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @Builder
-public class TicketResponse implements Serializable {
+public class ReservationResponse implements Serializable {
 
-    private UUID ticketId;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime departureDate;
+    private UUID reservationId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime arrivalDate;
+    private LocalDateTime dateTimeReservation;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate purchaseDate;
+    private LocalDate dateStart;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateEnd;
+
+    private Integer totalDays;
     private BigDecimal price;
 
-    private FlyResponse fly;
+    private HotelResponse hotel;
 }
