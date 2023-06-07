@@ -55,8 +55,19 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public TicketResponse update(TicketRequest request, UUID uuid) {
-        return null;
+    public TicketResponse update(TicketRequest request, UUID id) {
+        var ticketToUpdate = ticketRepository.findById(id).orElseThrow();
+        var fly = flyRepository.findById(request.getIdFly()).orElseThrow();
+
+        ticketToUpdate.setFly(fly);
+        ticketToUpdate.setPrice(BigDecimal.valueOf(0.25));
+        ticketToUpdate.setArrivalDate(LocalDateTime.now());
+        ticketToUpdate.setDepartureDate(LocalDateTime.now());
+
+        var ticket = this.ticketRepository.save(ticketToUpdate);
+        log.info("Ticket updated with id {}", ticketToUpdate.getTicketId());
+
+        return this.entityToResponse(ticket);
     }
 
     @Override
