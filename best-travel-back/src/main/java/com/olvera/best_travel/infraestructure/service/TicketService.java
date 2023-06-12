@@ -8,6 +8,7 @@ import com.olvera.best_travel.domain.entities.repositories.CustomerRepository;
 import com.olvera.best_travel.domain.entities.repositories.FlyRepository;
 import com.olvera.best_travel.domain.entities.repositories.TicketRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.ITicketService;
+import com.olvera.best_travel.infraestructure.helpers.CustomerHelper;
 import com.olvera.best_travel.util.BestTravelUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class TicketService implements ITicketService {
     private final FlyRepository flyRepository;
     private final CustomerRepository customerRepository;
     private final TicketRepository ticketRepository;
+    private final CustomerHelper customerHelper;
 
     @Override
     public TicketResponse create(TicketRequest request) {
@@ -45,6 +47,7 @@ public class TicketService implements ITicketService {
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
         log.info("Ticket saved with id: {}", ticketPersisted.getTicketId());
+        this.customerHelper.increase(customer.getDni(), TicketService.class);
         return this.entityToResponse(ticketToPersist);
     }
 

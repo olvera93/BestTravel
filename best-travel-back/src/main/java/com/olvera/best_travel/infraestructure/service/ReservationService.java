@@ -8,6 +8,7 @@ import com.olvera.best_travel.domain.entities.repositories.CustomerRepository;
 import com.olvera.best_travel.domain.entities.repositories.HotelRepository;
 import com.olvera.best_travel.domain.entities.repositories.ReservationRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.IReservationService;
+import com.olvera.best_travel.infraestructure.helpers.CustomerHelper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -28,6 +29,7 @@ public class ReservationService implements IReservationService {
     private final HotelRepository hotelRepository;
     private final CustomerRepository customerRepository;
     private final ReservationRepository reservationRepository;
+    private final CustomerHelper customerHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -47,7 +49,7 @@ public class ReservationService implements IReservationService {
                 .build();
 
         var reservationPersisted = reservationRepository.save(reservationToPersist);
-
+        this.customerHelper.increase(customer.getDni(), ReservationService.class);
         return this.entityToResponse(reservationPersisted);
     }
 
