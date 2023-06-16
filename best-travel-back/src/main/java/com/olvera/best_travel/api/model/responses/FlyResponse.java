@@ -1,6 +1,6 @@
 package com.olvera.best_travel.api.model.responses;
 
-import com.olvera.best_travel.util.AeroLine;
+import com.olvera.best_travel.util.enums.AeroLine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

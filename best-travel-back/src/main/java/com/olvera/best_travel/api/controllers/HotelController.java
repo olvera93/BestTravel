@@ -2,7 +2,7 @@ package com.olvera.best_travel.api.controllers;
 
 import com.olvera.best_travel.api.model.responses.HotelResponse;
 import com.olvera.best_travel.infraestructure.abstract_service.IHotelService;
-import com.olvera.best_travel.util.SortType;
+import com.olvera.best_travel.util.enums.SortType;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

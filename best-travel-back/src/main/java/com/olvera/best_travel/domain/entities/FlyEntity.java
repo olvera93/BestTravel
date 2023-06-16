@@ -1,6 +1,6 @@
 package com.olvera.best_travel.domain.entities;
 
-import com.olvera.best_travel.util.AeroLine;
+import com.olvera.best_travel.util.enums.AeroLine;
 import jakarta.persistence.*;
 import lombok.*;
 

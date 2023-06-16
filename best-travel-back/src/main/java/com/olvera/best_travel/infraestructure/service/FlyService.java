@@ -4,7 +4,7 @@ import com.olvera.best_travel.api.model.responses.FlyResponse;
 import com.olvera.best_travel.domain.entities.FlyEntity;
 import com.olvera.best_travel.domain.entities.repositories.FlyRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.IFlyService;
-import com.olvera.best_travel.util.SortType;
+import com.olvera.best_travel.util.enums.SortType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

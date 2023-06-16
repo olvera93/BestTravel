@@ -4,7 +4,7 @@ import com.olvera.best_travel.api.model.responses.HotelResponse;
 import com.olvera.best_travel.domain.entities.HotelEntity;
 import com.olvera.best_travel.domain.entities.repositories.HotelRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.IHotelService;
-import com.olvera.best_travel.util.SortType;
+import com.olvera.best_travel.util.enums.SortType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

@@ -8,6 +8,7 @@ import com.olvera.best_travel.domain.entities.repositories.CustomerRepository;
 import com.olvera.best_travel.domain.entities.repositories.FlyRepository;
 import com.olvera.best_travel.domain.entities.repositories.TicketRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.ITicketService;
+import com.olvera.best_travel.infraestructure.helpers.BlackListHelper;
 import com.olvera.best_travel.infraestructure.helpers.CustomerHelper;
 import com.olvera.best_travel.util.BestTravelUtil;
 import lombok.AllArgsConstructor;
@@ -30,9 +31,12 @@ public class TicketService implements ITicketService {
     private final CustomerRepository customerRepository;
     private final TicketRepository ticketRepository;
     private final CustomerHelper customerHelper;
+    private final BlackListHelper blackListHelper;
 
     @Override
     public TicketResponse create(TicketRequest request) {
+        blackListHelper.isInBlackListCustomer(request.getIdClient());
+
         var fly = flyRepository.findById(request.getIdFly()).orElseThrow();
         var customer = customerRepository.findById(request.getIdClient()).orElseThrow();
         var ticketToPersist = TicketEntity.builder()

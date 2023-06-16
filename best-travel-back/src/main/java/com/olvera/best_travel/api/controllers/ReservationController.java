@@ -3,6 +3,7 @@ package com.olvera.best_travel.api.controllers;
 import com.olvera.best_travel.api.model.request.ReservationRequest;
 import com.olvera.best_travel.api.model.responses.ReservationResponse;
 import com.olvera.best_travel.infraestructure.abstract_service.IReservationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ReservationController {
     private final IReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<ReservationResponse> postReservation(@RequestBody ReservationRequest request) {
+    public ResponseEntity<ReservationResponse> postReservation(@Valid @RequestBody ReservationRequest request) {
         return ResponseEntity.ok(reservationService.create(request));
     }
 
@@ -30,7 +31,7 @@ public class ReservationController {
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<ReservationResponse> putTicket(@PathVariable UUID id, @RequestBody ReservationRequest request) {
+    public ResponseEntity<ReservationResponse> putTicket(@Valid @PathVariable UUID id, @RequestBody ReservationRequest request) {
         return ResponseEntity.ok(this.reservationService.update(request, id));
     }
 
