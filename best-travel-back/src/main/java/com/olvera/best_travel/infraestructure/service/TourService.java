@@ -40,7 +40,7 @@ public class TourService implements ITourService {
 
         var flights = new HashSet<FlyEntity>();
         request.getFlights().forEach(fly -> {
-            flights.add(this.flyRepository.findById(fly.getFlyId()).orElseThrow(() -> new IdNotFoundException(Tables.fly.name())));
+            flights.add(this.flyRepository.findById(fly.getTourId()).orElseThrow(() -> new IdNotFoundException(Tables.fly.name())));
 
         });
 

@@ -40,22 +40,26 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.create(request));
     }
 
+    @Operation(summary = "Return a reservation with of passed")
     @GetMapping(path = "{id}")
     public ResponseEntity<ReservationResponse> getTicket(@PathVariable UUID id) {
         return ResponseEntity.ok(this.reservationService.read(id));
     }
 
+    @Operation(summary = "Update reservation")
     @PutMapping(path = "{id}")
     public ResponseEntity<ReservationResponse> putTicket(@Valid @PathVariable UUID id, @RequestBody ReservationRequest request) {
         return ResponseEntity.ok(this.reservationService.update(request, id));
     }
 
+    @Operation(summary = "Delete a reservation with of passed")
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Void> deleteTicket(@PathVariable UUID id) {
         this.reservationService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "return a reservation price given a hotel id")
     @GetMapping()
     public ResponseEntity<Map<String, BigDecimal>> getHotelPrice(@RequestParam Long hotelId) {
         return ResponseEntity.ok(Collections.singletonMap("hotelPrice", this.reservationService.findPrice(hotelId )));
