@@ -8,6 +8,7 @@ import com.olvera.best_travel.domain.entities.repositories.CustomerRepository;
 import com.olvera.best_travel.domain.entities.repositories.HotelRepository;
 import com.olvera.best_travel.domain.entities.repositories.ReservationRepository;
 import com.olvera.best_travel.infraestructure.abstract_service.IReservationService;
+import com.olvera.best_travel.infraestructure.helpers.ApiCurrencyConnectorHelper;
 import com.olvera.best_travel.infraestructure.helpers.BlackListHelper;
 import com.olvera.best_travel.infraestructure.helpers.CustomerHelper;
 import com.olvera.best_travel.util.exceptions.IdNotFoundException;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.UUID;
 
 @Transactional
@@ -33,6 +35,7 @@ public class ReservationService implements IReservationService {
     private final ReservationRepository reservationRepository;
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
+    private final ApiCurrencyConnectorHelper currencyConnectorHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -103,9 +106,14 @@ public class ReservationService implements IReservationService {
     }
 
     @Override
-    public BigDecimal findPrice(Long hotelId) {
+    public BigDecimal findPrice(Long hotelId, Currency currency) {
         var hotel = hotelRepository.findById(hotelId).orElseThrow(() -> new IdNotFoundException("hotel"));
-        return hotel.getPrice().add(hotel.getPrice().multiply(changes_price_percentage));
+        var priceInDollar = hotel.getPrice().add(hotel.getPrice().multiply(changes_price_percentage));
+
+        if (currency.equals(Currency.getInstance("USD"))) return priceInDollar;
+        var currencyDto = this.currencyConnectorHelper.getCurrency(currency);
+        log.info("API currency in {}, response {}", currencyDto.getExchangeDate().toString(), currencyDto.getRates());
+        return priceInDollar.multiply(currencyDto.getRates().get(currency));
     }
 
     public static final BigDecimal changes_price_percentage = BigDecimal.valueOf(0.20);
